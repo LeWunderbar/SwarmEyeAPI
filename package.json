@@ -4,12 +4,17 @@
   "description": "An API to check if docker swarm services are up or down.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "npm install",
+    "start": "node ./main.js"
   },
   "repository": {
     "type": "git",
     "url": "SwarmEyeAPI"
   },
   "author": "M23",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.21.0"
+  }
 }
