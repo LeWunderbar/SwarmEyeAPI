@@ -1,0 +1,15 @@
+{
+  "name": "swarmeyeapi",
+  "version": "1.0.0",
+  "description": "An API to check if docker swarm services are up or down.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "SwarmEyeAPI"
+  },
+  "author": "M23",
+  "license": "ISC"
+}
