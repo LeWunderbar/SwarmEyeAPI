@@ -105,6 +105,10 @@ app.get("/monitor/:serviceName", async (req, res) => {
     }
 });
 
+app.get("/status", async (req, res) => {
+    return res.status(200).json({ status: "Running" });
+})
+
 app.listen(port, () => {
     console.log(`Monitoring service running on port ${port}`);
 });
