@@ -29,7 +29,6 @@ http://localhost:5000/monitor/ServiceName
 `sudo nano /lib/systemd/system/docker.service`
 
 2. In this file, locate the line starting with `ExecStart` and modify it by adding `-H=tcp://0.0.0.0:4243`. It should look like this:
-
 `ExecStart=/usr/bin/dockerd -H=fd:// -H=tcp://0.0.0.0:4243`
 
 3. Save the file and reload the Docker daemon:
