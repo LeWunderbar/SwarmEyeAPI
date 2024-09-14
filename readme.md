@@ -1,0 +1,1 @@
+An API to get infomation if an Docker Swarm Service is down or up
