@@ -26,18 +26,19 @@ http://localhost:5000/monitor/ServiceName
 ## Enabling Docker API for Each Node:
 
 1. Open the `docker.service` file by navigating to `/lib/systemd/system` and running the following command:
-sudo nano /lib/systemd/system/docker.service
+`sudo nano /lib/systemd/system/docker.service`
 
 2. In this file, locate the line starting with `ExecStart` and modify it by adding `-H=tcp://0.0.0.0:4243`. It should look like this:
-ExecStart=/usr/bin/dockerd -H=fd:// -H=tcp://0.0.0.0:4243
+
+`ExecStart=/usr/bin/dockerd -H=fd:// -H=tcp://0.0.0.0:4243`
 
 3. Save the file and reload the Docker daemon:
-sudo systemctl daemon-reload
+`sudo systemctl daemon-reload`
 
 4. Restart the Docker service:
-sudo service docker restart
+`sudo service docker restart`
 
 5. Test if the Docker API is working:
-curl http://localhost:4243/version
+`curl http://localhost:4243/version`
 
 6. Add the API endpoint to the `config.json` file under the `"node_endpoints"` section.
