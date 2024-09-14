@@ -1,31 +1,43 @@
-An API to get infomation if an Docker Swarm Service is down or up
+# SwarmEye API
 
-API usage:
+SwarmEye API is a wrapper for the Docker API that allows you to monitor the status of Docker Swarm services based on their replication status.
+
+## Notes:
+- This API **only works** for Docker Swarm clusters, as services are unique to Docker's Swarm mode.
+- For services in **Global replication mode**, all replicas must be running for the service to be recognized as "UP."
+- For services using **standard replication mode**, at least one replica must be running for the service to be considered "UP."
+
+## API Usage:
 http://localhost:5000/monitor/ServiceName
 
-Responds:
-Up: 200 {"status":"up"}
-Down: 503 {"status": "down", "reason": "Reasoning"}
-Error: 500 {"status": "error", "reason": "Reasoning/Error"}
+### Responses:
+- **Up:**  
+  Status code: `200`  
+  Response: `{"status":"up"}`
+  
+- **Down:**  
+  Status code: `503`  
+  Response: `{"status": "down", "reason": "Reasoning"}`
+  
+- **Error:**  
+  Status code: `500`  
+  Response: `{"status": "error", "reason": "Reasoning/Error"}`
 
-Enable Docker API for each node:
-1: Navigate to /lib/systemd/system in your terminal and open docker.service file
-   sudo nano /lib/systemd/system/docker.service
+## Enabling Docker API for Each Node:
 
-2: Save the file
+1. Open the `docker.service` file by navigating to `/lib/systemd/system` and running the following command:
+sudo nano /lib/systemd/system/docker.service
 
-3: Find the line which starts with ExecStart and adds -H=tcp://0.0.0.0:4243 to make it look like
-   ExecStart=/usr/bin/dockerd -H=fd:// -H=tcp://0.0.0.0:4243
+2. In this file, locate the line starting with `ExecStart` and modify it by adding `-H=tcp://0.0.0.0:4243`. It should look like this:
+ExecStart=/usr/bin/dockerd -H=fd:// -H=tcp://0.0.0.0:4243
 
-4: Reload the docker daemon using the below command
-   sudo systemctl daemon-reload
+3. Save the file and reload the Docker daemon:
+sudo systemctl daemon-reload
 
-5: Restart the docker service using the below command
-   sudo service docker restart
+4. Restart the Docker service:
+sudo service docker restart
 
-6: Test if working:
-   curl http://localhost:4243/version
+5. Test if the Docker API is working:
+curl http://localhost:4243/version
 
-7: Add to config.json file under "node_endpoints".
-
-* You can change the port to whatever you want. just make sure it reachable.
+6. Add the API endpoint to the `config.json` file under the `"node_endpoints"` section.
