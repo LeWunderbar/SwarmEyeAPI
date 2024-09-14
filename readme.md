@@ -4,9 +4,9 @@ API usage:
 http://localhost:5000/monitor/ServiceName
 
 Responds:
-Up: 200 { status: "up" }
-Down: 503 { status: "down", reason: "Reasoning" }
-Error: 500 { status: "error", reason: "Reasoning/Error" }
+Up: 200 {"status":"up"}
+Down: 503 {"status": "down", "reason": "Reasoning"}
+Error: 500 {"status": "error", "reason": "Reasoning/Error"}
 
 Enable Docker API for each node:
 1: Navigate to /lib/systemd/system in your terminal and open docker.service file
