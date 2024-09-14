@@ -33,7 +33,7 @@ async function tryNextApiUntilSuccess(func, ...args) {
     }
 
     console.error("Cluster offline.");
-    return res.status(500).json({ status: "down", reason: "Cluster Down!" });
+    return res.status(503).json({ status: "down", reason: "Cluster Down!" });
 }
 
 async function getRunningTasksCount(serviceName) {
@@ -97,7 +97,7 @@ app.get("/monitor/:serviceName", async (req, res) => {
         if (runningReplicas >= wantedReplicas) {
             return res.status(200).json({ status: "up" });
         } else {
-            return res.status(500).json({ status: "down" });
+            return res.status(503).json({ status: "down" });
         }
     } catch (error) {
         console.error(error.message);
